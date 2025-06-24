@@ -1,103 +1,415 @@
-// Office data - combining both sets of numbers
-const offices = [
-    // KM Express numbers
-    { name: "UK Main Office", phone: "+44 775 254 3300", type: "uk" },
-    { name: "Baghdad", phone: "+964 772 358 0202", type: "iraq" },
-    { name: "Hawler (Erbil)", phone: "+964 750 509 8484", type: "iraq" },
-    { name: "Slemani", phone: "+964 770 509 4242", type: "iraq" },
-    { name: "Duhok", phone: "+964 750 509 7272", type: "iraq" },
-    { name: "Kirkuk", phone: "+964 770 034 0505", type: "iraq" },
-    { name: "Halabja Shahid", phone: "+964 770 822 8989", type: "iraq" },
-    { name: "Raniya", phone: "+964 770 508 6464", type: "iraq" },
-    { name: "Kalar", phone: "+964 772 358 0303", type: "iraq" },
-    { name: "IRAQ Main Office", phone: "+964 772 358 0101", type: "iraq" },
-    { name: "Koya", phone: "+964 776 442 2018", type: "iraq" },
-    { name: "Soran", phone: "+964 776 442 2017", type: "iraq" },
-    { name: "Said Sadiq", phone: "+964 771 166 7272", type: "iraq" },
-    { name: "Zakho", phone: "+964 750 119 1473", type: "iraq" },
-    { name: "Chamchamal", phone: "+964 773 600 5757", type: "iraq" },
-    { name: "Halabja Taza", phone: "+964 770 822 8181", type: "iraq" },
-    { name: "Qaladze", phone: "+964 773 300 6464", type: "iraq" },
-    { name: "Darbandikhan", phone: "+964 770 822 8585", type: "iraq" },
-    
-    // Iraq Distribution Offices numbers
-    { name: "Baghdad Distribution", phone: "+964 773 034 0505", type: "iraq" },
-    { name: "Hawler (Erbil) Distribution", phone: "+964 751 543 0090", type: "iraq" },
-    { name: "Slemani Distribution", phone: "+964 771 233 0049", type: "iraq" },
-    { name: "Duhok Distribution", phone: "+964 750 119 1473", type: "iraq" },
-    { name: "Kirkuk Distribution", phone: "+964 770 034 0505", type: "iraq" },
-    { name: "Halabja Shahid Distribution", phone: "+964 770 822 8989", type: "iraq" },
-    { name: "Raniya Distribution", phone: "+964 750 034 0505", type: "iraq" },
-    { name: "Kalar Distribution", phone: "+964 772 358 0303", type: "iraq" },
-    { name: "IRAQ Main Distribution", phone: "+964 770 509 4242", type: "iraq" },
-    { name: "Koya Distribution", phone: "+964 776 442 2018", type: "iraq" },
-    { name: "Soran Distribution", phone: "+964 776 442 2017", type: "iraq" },
-    { name: "Said Sadiq Distribution", phone: "+964 771 166 7272", type: "iraq" },
-    { name: "Zakho Distribution", phone: "+964 750 119 1473", type: "iraq" },
-    { name: "Chamchamal Distribution", phone: "+964 773 600 5757", type: "iraq" },
-    { name: "Halabja Taza Distribution", phone: "+964 770 822 8181", type: "iraq" },
-    { name: "Qaladze Distribution", phone: "+964 773 300 6464", type: "iraq" },
-    { name: "Darbandikhan Distribution", phone: "+964 770 822 8585", type: "iraq" }
-];
+:root {
+    --primary-blue: #003366;
+    --secondary-blue: #0066cc;
+    --primary-red: #cc0000;
+    --secondary-red: #ff3333;
+    --whatsapp-green: #25D366;
+    --light-gray: #f5f5f5;
+    --dark-gray: #333333;
+    --gold: #FFD700;
+}
 
-// Generate office cards
-function generateOfficeCards(filteredOffices = offices) {
-    const container = document.getElementById('officesContainer');
-    container.innerHTML = '';
-    
-    if (filteredOffices.length === 0) {
-        container.innerHTML = '<div class="no-results">No offices found matching your search. Please try another term.</div>';
-        return;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+    background-attachment: fixed;
+    color: var(--dark-gray);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-red));
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+    background-size: cover;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+}
+
+.main-logo {
+    width: 180px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(45deg, var(--primary-blue), var(--primary-red));
+    padding: 15px;
+}
+
+.logo-text {
+    text-align: center;
+}
+
+.logo-text h1 {
+    font-size: 3.5rem;
+    margin: 0;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    letter-spacing: 1px;
+}
+
+.logo-text h2 {
+    font-size: 1.8rem;
+    margin: 0.5rem 0 0;
+    color: var(--gold);
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.tagline {
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    opacity: 0.9;
+    max-width: 600px;
+    color: white;
+}
+
+.search-container {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    margin: 2rem auto;
+    max-width: 800px;
+    border-radius: 12px;
+    position: relative;
+    z-index: 10;
+}
+
+.search-container h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary-blue);
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.search-bar {
+    display: flex;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 15px 25px;
+    border: none;
+    font-size: 1.1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-bar input:focus {
+    background-color: #f0f8ff;
+}
+
+.search-bar button {
+    background: linear-gradient(135deg, var(--primary-red), var(--secondary-red));
+    color: white;
+    border: none;
+    padding: 0 30px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-bar button:hover {
+    background: linear-gradient(135deg, var(--secondary-red), var(--primary-red));
+    transform: scale(1.05);
+}
+
+.search-bar button i {
+    margin-right: 8px;
+}
+
+.offices-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto 3rem;
+}
+
+.section-title {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: white;
+    margin: 1rem 0 2rem;
+    font-size: 2.2rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.section-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 4px;
+    background: linear-gradient(to right, var(--primary-blue), var(--primary-red));
+    border-radius: 2px;
+}
+
+.office-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-left: 5px solid var(--primary-blue);
+    display: flex;
+    flex-direction: column;
+}
+
+.office-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.card-header {
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+    color: white;
+    padding: 1.2rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.card-header i {
+    margin-right: 10px;
+    font-size: 1.5rem;
+}
+
+.card-body {
+    padding: 1.8rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.phone-link {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.phone-link:hover {
+    background: linear-gradient(135deg, var(--primary-red), var(--secondary-red));
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.phone-link i {
+    margin-right: 10px;
+    font-size: 1.8rem;
+    color: var(--whatsapp-green);
+}
+
+footer {
+    background: linear-gradient(135deg, var(--primary-blue), var(--dark-gray));
+    color: white;
+    padding: 2.5rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,100 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+    background-size: cover;
+}
+
+.footer-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem;
+    font-size: 1.4rem;
+    color: white;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    margin: 20px 0;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+}
+
+.social-icons {
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.social-icons a {
+    color: white;
+    font-size: 2.5rem;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.social-icons a:hover {
+    transform: translateY(-5px);
+    color: var(--gold);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 20px;
+}
+
+@media (max-width: 992px) {
+    .offices-container {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .logo-container {
+        flex-direction: column;
     }
     
-    filteredOffices.forEach(office => {
-        const card = document.createElement('div');
-        card.className = 'office-card';
-        
-        // Clean phone number for WhatsApp link
-        const cleanedPhone = office.phone.replace(/[^0-9+]/g, '');
-        const whatsappLink = `https://wa.me/${cleanedPhone}`;
-        
-        // Determine icon based on location type
-        const iconClass = office.type === 'uk' ? 'fas fa-flag-uk' : 'fas fa-flag';
-        
-        card.innerHTML = `
-            <div class="card-header">
-                <i class="${iconClass}"></i>
-                ${office.name}
-            </div>
-            <div class="card-body">
-                <a href="${whatsappLink}" class="phone-link" target="_blank">
-                    <i class="fab fa-whatsapp"></i> ${office.phone}
-                </a>
-            </div>
-        `;
-        
-        container.appendChild(card);
-    });
+    .logo-text h1 {
+        font-size: 2.5rem;
+    }
+    
+    .logo-text h2 {
+        font-size: 1.4rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .search-container {
+        padding: 1.5rem;
+    }
+    
+    .search-bar {
+        flex-direction: column;
+        border-radius: 12px;
+    }
+    
+    .search-bar input {
+        border-radius: 12px 12px 0 0;
+        padding: 12px 20px;
+    }
+    
+    .search-bar button {
+        padding: 12px;
+        border-radius: 0 0 12px 12px;
+    }
+    
+    .offices-container {
+        padding: 1rem;
+        gap: 20px;
+    }
+    
+    .contact-info {
+        flex-direction: column;
+        gap: 15px;
+    }
 }
 
-// Search function
-function searchOffices() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    const filtered = offices.filter(office => 
-        office.name.toLowerCase().includes(searchTerm) || 
-        office.phone.includes(searchTerm)
-    );
-    generateOfficeCards(filtered);
+@media (max-width: 480px) {
+    .logo-text h1 {
+        font-size: 2rem;
+    }
+    
+    .logo-text h2 {
+        font-size: 1.2rem;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+    }
+    
+    .social-icons {
+        gap: 20px;
+    }
+    
+    .social-icons a {
+        font-size: 2rem;
+    }
 }
-
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', () => {
-    generateOfficeCards();
-    
-    // Live search as user types
-    document.getElementById('searchInput').addEventListener('input', searchOffices);
-    
-    // Also search on Enter key
-    document.getElementById('searchInput').addEventListener('keyup', (e) => {
-        if (e.key === 'Enter') {
-            searchOffices();
-        }
-    });
-});
