@@ -3,7 +3,7 @@ const offices = [
     // KM Express numbers
     { name: "UK Main Office", phone: "+44 775 254 3300", type: "uk" },
     { name: "Baghdad", phone: "+964 772 358 0202", type: "iraq" },
-    { name: "Hawler", phone: "+964 750 509 8484", type: "iraq" },
+    { name: "Hawler (Erbil)", phone: "+964 750 509 8484", type: "iraq" },
     { name: "Slemani", phone: "+964 770 509 4242", type: "iraq" },
     { name: "Duhok", phone: "+964 750 509 7272", type: "iraq" },
     { name: "Kirkuk", phone: "+964 770 034 0505", type: "iraq" },
@@ -22,7 +22,7 @@ const offices = [
     
     // Iraq Distribution Offices numbers
     { name: "Baghdad Distribution", phone: "+964 773 034 0505", type: "iraq" },
-    { name: "Hawler Distribution", phone: "+964 751 543 0090", type: "iraq" },
+    { name: "Hawler (Erbil) Distribution", phone: "+964 751 543 0090", type: "iraq" },
     { name: "Slemani Distribution", phone: "+964 771 233 0049", type: "iraq" },
     { name: "Duhok Distribution", phone: "+964 750 119 1473", type: "iraq" },
     { name: "Kirkuk Distribution", phone: "+964 770 034 0505", type: "iraq" },
